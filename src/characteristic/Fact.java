@@ -54,7 +54,6 @@ class Fact{
 	 * в понятном виде в консоль.
 	 */
 	public void print() {
-		// TODO Auto-generated method stub
 		System.out.println(this.name);
 		for(int i=0;i<ValuesList.size();i++){
 			System.out.println(" |---"+ValuesList.get(i));

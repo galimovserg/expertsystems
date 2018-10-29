@@ -33,7 +33,6 @@ class MultiRule{
 				ch="";
 			}
 			System.out.println(")"+ch);
-			
 		}
 		System.out.println("рн ");
 		
@@ -80,8 +79,7 @@ class MultiRule{
 	 */
 	int joinconsequence(Fact nfact, String val){
 		for(int i=0;i<folwfacts.size();i++){
-			if(nfact!=folwfacts.get(i)){
-				
+			if(nfact!=folwfacts.get(i)){	
 			}else{
 				return 0;
 			}

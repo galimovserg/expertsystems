@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Navigator {
-	
 	static class Item{
 		private String caption="";
 		private Item parent=null;
@@ -13,13 +12,12 @@ public class Navigator {
 		Item(String caption){
 			this.caption=caption;
 		}
-		void action() {
-			
+		void action() {	
 		}
 		final void addItem(Item item){
 			if(subitems==null)subitems=new ArrayList<Item>();
 			item.setParent(this);
-			subitems.add(item);
+			subitems.add(item);  
 			
 		}
 		final void setParent(Item item) {

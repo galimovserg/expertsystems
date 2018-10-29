@@ -7,10 +7,6 @@ import java.util.Scanner;
 
 public class characteristic {
 	
-	
-	
-
-	
 	static ArrayList<Fact> CharacterList = new ArrayList<Fact>();
 	static ArrayList<MultiRule> RulesList = new ArrayList<MultiRule>();
 	
