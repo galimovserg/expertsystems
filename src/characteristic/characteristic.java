@@ -3,88 +3,22 @@ package characteristic;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+
 public class characteristic {
 	
 	
 	
-	static final String ONE="1";
-	static final String TWO="2";
-	static final String PRINTFACTS="3";
-	static final String EXIT="4";
-	static final String THREE="5";
-	static final String FOUR="6";
+
 	
 	static ArrayList<Fact> CharacterList = new ArrayList<Fact>();
 	static ArrayList<MultiRule> RulesList = new ArrayList<MultiRule>();
 	
-	
-	static String getLine(int mode){
-		if(mode==1){
-			System.out.println("Выберите команду:");
-			System.out.println("1 - Ввод нового значения старой характеристики");
-			System.out.println("2 - Ввод новой характеристики.");
-			System.out.println("3 - Просмотр фактов.");
-			System.out.println("4 - Выход.");
-			Scanner in = new Scanner(System.in);
-			String stroke=in.nextLine();
-			return stroke;
-		}else 
-		if(mode==2){
-			System.out.println("Выберите команду:");
-			System.out.println("5 - Ввод нового правила");
-			System.out.println("6 - Просмотр правил");
-			System.out.println("4 - Выход.");
-			Scanner in = new Scanner(System.in);
-			String stroke=in.nextLine();
-			return stroke;
-		}
-		return "";
-		
-	}
-	
-	static boolean implicate(String stroke){
-		if(stroke.equals(ONE)){
-			
-			if(!readValues()){
-				System.out.println("Данной характеристики не существует!");
-			}
-			return true;
-		}else
-		if(stroke.equals(TWO)){
-			if(!readNewFact()){
-				System.out.println("Характеристика с таким именем уже существует!");
-			}
-			return true;
-		}else
-		if(stroke.equals(PRINTFACTS)){
-			printFacts();
-			return true;
-			
-		}else
-		if(stroke.equals(EXIT)){
-			return false;
-		}else
-		if(stroke.equals(THREE)){
-			if(!readNewMultiRule()){
-				System.out.println("Правило не добавлено!");
-			}
-			return true;
-		}else
-		if(stroke.equals(FOUR)){
-			printRules();
-			return true;
-		}
-		else{
-			System.out.println("Введите цифру от 1 до 4!");
-			return true;
-		}
-		
-		
-	}
 	static boolean readNewFact(){
 		Scanner in = new Scanner(System.in);
 		System.out.println("Введите имя новой характеристики:");
 		String stroke=in.nextLine();
+		in.close();
 		Fact newfact = new Fact(stroke);
 		int len=CharacterList.size();
 		for(int i=0;i<len;i++){
@@ -113,15 +47,15 @@ public class characteristic {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Введите имя существующей характеристики!");
 		String stroke=in.nextLine();
-		int len=CharacterList.size();
 		Fact locfact=searchByName(stroke);
 		if(locfact!=null) {
 			System.out.println("Введите новое значение!");
 			String value=in.nextLine();
 			locfact.addValue(value);
+			
 			return true;
 		}
-		
+		in.close();
 		return false;
 	}
 	static boolean readNewMultiRule(){
@@ -133,6 +67,7 @@ public class characteristic {
 		String name=in.nextLine();
 		Fact locfact=searchByName(name);
 		if(locfact==null){
+			
 			System.out.println("характеристики не задана");
 			return false;
 		}
@@ -143,10 +78,12 @@ public class characteristic {
 		//1 - характеристика не найдена, но значение не входит в список возможных
 		//2 - все удачно
 		if(rt==0){
+			
 			System.out.println("характеристика уже усть");
 			return false;
 		}else
 		if(rt==1){
+			
 			System.out.println("значение не входит в список возможных");
 			return false;
 		}
@@ -158,6 +95,7 @@ public class characteristic {
 		Fact locfactc=searchByName(namec);
 		if(locfactc==null){
 			System.out.println("характеристики не задана");
+			
 			return false;
 		}
 		System.out.println("Введите значение!");
@@ -165,10 +103,12 @@ public class characteristic {
 		rt=locRule.joinconsequence(locfactc, valuec);
 		if(rt==0){
 			System.out.println("характеристика уже есть");
+			
 			return false;
 		}else
 		if(rt==1){
 			System.out.println("значение не входит в список возможных");
+			
 			return false;
 		}
 		
@@ -197,12 +137,7 @@ public class characteristic {
 		
 	}
 	
-	static void readCharacteristics(){
-		System.out.println("Вы находитесь в разделе работы с характеристиками.");
-		while(implicate(getLine(1))){
-			
-		}
-	}
+
 	static void multirultest(){
 		
 		Fact haircolor = new Fact("цвет_волос");
@@ -231,19 +166,76 @@ public class characteristic {
 		
 		
 	}
-	static void readRules(){
-		System.out.println("Вы находитесь в разделе работы с правилами.");
-		while(implicate(getLine(2))){
-			
-		}
-	}
+
 	
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		readCharacteristics();
-		readRules();
+		Navigator nav=new Navigator() {
+			@Override 
+			void onCreate() {
+				Item item1=new Item("Характеристики");
+				
+				Item item11=new Item("Ввод нового значения старой характеристики") {
+					@Override
+					void action() {
+						if(!readValues()){
+							System.out.println("Данной характеристики не существует!");
+						}
+					}
+					
+				};
+				Item item12=new Item("Ввод новой характеристики") {
+					@Override
+					void action() {
+						if(!readNewFact()){
+							System.out.println("Такая характеристика уже существует!");
+						}
+					}
+					
+				};
+				Item item13=new Item("Просмотр характеристик") {
+					@Override
+					void action() {
+						printFacts();
+					}
+					
+				};
+				Item item2=new Item("Правила");
+				
+				Item item21=new Item("Ввод нового правила") {
+					@Override
+					void action() {
+						if(!readNewMultiRule()){
+							System.out.println("Правило не добавлено!");
+						}
+					}
+				};
+				
+				Item item22=new Item("Правка правила");
+				
+				Item item23=new Item("Просмотр правил") {
+					@Override
+					void action() {
+						System.out.write(13);
+						printRules();
+					}
+				};
+				item1.addItem(item11);
+				item1.addItem(item12);
+				item1.addItem(item13);
+				item2.addItem(item21);
+				item2.addItem(item22);
+				item2.addItem(item23);
+				addItem(item1);
+				addItem(item2);
+			}
+			
+		};
+		nav.run();
+		
 		
 	}
+	
+	
 
 }
