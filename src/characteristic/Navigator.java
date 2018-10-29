@@ -39,14 +39,14 @@ public class Navigator {
 		}
 		void print(){
 			
-			System.out.println("Выбирите пункт:");
+			System.out.println("Р’С‹Р±РёСЂРёС‚Рµ РїСѓРЅРєС‚:");
 			for(int i=0;i<subitems.size();i++) {
 				Item locit = subitems.get(i);
 				if(locit!=null)
 					System.out.println(" "+(int)(i+1)+" - "+locit.getCaption() );
 				
 			}
-			System.out.println("0 - Выход");
+			System.out.println("0 - Р’С‹С…РѕРґ");
 		}
 		Item getParent() {
 			return parent;

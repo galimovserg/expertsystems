@@ -12,7 +12,7 @@ public class characteristic {
 	
 	static boolean readNewFact(){
 		Scanner in = new Scanner(System.in);
-		System.out.println("Введите имя новой характеристики:");
+		System.out.println("Р’РІРµРґРёС‚Рµ РёРјСЏ РЅРѕРІРѕР№ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё:");
 		String stroke=in.nextLine();
 		in.close();
 		Fact newfact = new Fact(stroke);
@@ -41,11 +41,11 @@ public class characteristic {
 	static boolean readValues(){
 		
 		Scanner in = new Scanner(System.in);
-		System.out.println("Введите имя существующей характеристики!");
+		System.out.println("Р’РІРµРґРёС‚Рµ РёРјСЏ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµР№ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё!");
 		String stroke=in.nextLine();
 		Fact locfact=searchByName(stroke);
 		if(locfact!=null) {
-			System.out.println("Введите новое значение!");
+			System.out.println("Р’РІРµРґРёС‚Рµ РЅРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ!");
 			String value=in.nextLine();
 			locfact.addValue(value);
 			
@@ -58,52 +58,52 @@ public class characteristic {
 		MultiRule locRule=new MultiRule();
 		Scanner in = new Scanner(System.in);
 		
-		System.out.println("Ввод условия...");
-		System.out.println("Введите имя существующей характеристики!");
+		System.out.println("Р’РІРѕРґ СѓСЃР»РѕРІРёСЏ...");
+		System.out.println("Р’РІРµРґРёС‚Рµ РёРјСЏ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµР№ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё!");
 		String name=in.nextLine();
 		Fact locfact=searchByName(name);
 		if(locfact==null){
 			
-			System.out.println("характеристики не задана");
+			System.out.println("С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё РЅРµ Р·Р°РґР°РЅР°");
 			return false;
 		}
-		System.out.println("Введите значение!");
+		System.out.println("Р’РІРµРґРёС‚Рµ Р·РЅР°С‡РµРЅРёРµ!");
 		String value=in.nextLine();
 		int rt=locRule.joincondition(locfact, value);
-		//0 - характеристика уже есть
-		//1 - характеристика не найдена, но значение не входит в список возможных
-		//2 - все удачно
+		//0 - С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР° СѓР¶Рµ РµСЃС‚СЊ
+		//1 - С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР° РЅРµ РЅР°Р№РґРµРЅР°, РЅРѕ Р·РЅР°С‡РµРЅРёРµ РЅРµ РІС…РѕРґРёС‚ РІ СЃРїРёСЃРѕРє РІРѕР·РјРѕР¶РЅС‹С…
+		//2 - РІСЃРµ СѓРґР°С‡РЅРѕ
 		if(rt==0){
 			
-			System.out.println("характеристика уже усть");
+			System.out.println("С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР° СѓР¶Рµ СѓСЃС‚СЊ");
 			return false;
 		}else
 		if(rt==1){
 			
-			System.out.println("значение не входит в список возможных");
+			System.out.println("Р·РЅР°С‡РµРЅРёРµ РЅРµ РІС…РѕРґРёС‚ РІ СЃРїРёСЃРѕРє РІРѕР·РјРѕР¶РЅС‹С…");
 			return false;
 		}
 		
 		
-		System.out.println("Ввод следствия...");
-		System.out.println("Введите имя существующей характеристики!");
+		System.out.println("Р’РІРѕРґ СЃР»РµРґСЃС‚РІРёСЏ...");
+		System.out.println("Р’РІРµРґРёС‚Рµ РёРјСЏ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РµР№ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё!");
 		String namec=in.nextLine();
 		Fact locfactc=searchByName(namec);
 		if(locfactc==null){
-			System.out.println("характеристики не задана");
+			System.out.println("С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё РЅРµ Р·Р°РґР°РЅР°");
 			
 			return false;
 		}
-		System.out.println("Введите значение!");
+		System.out.println("Р’РІРµРґРёС‚Рµ Р·РЅР°С‡РµРЅРёРµ!");
 		String valuec=in.nextLine();
 		rt=locRule.joinconsequence(locfactc, valuec);
 		if(rt==0){
-			System.out.println("характеристика уже есть");
+			System.out.println("С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР° СѓР¶Рµ РµСЃС‚СЊ");
 			
 			return false;
 		}else
 		if(rt==1){
-			System.out.println("значение не входит в список возможных");
+			System.out.println("Р·РЅР°С‡РµРЅРёРµ РЅРµ РІС…РѕРґРёС‚ РІ СЃРїРёСЃРѕРє РІРѕР·РјРѕР¶РЅС‹С…");
 			
 			return false;
 		}
@@ -115,7 +115,7 @@ public class characteristic {
 	private static void printFacts() {
 		// TODO Auto-generated method stub
 		int len = CharacterList.size();
-		if(len==0)System.out.println("Характеристики отсутствуют!");
+		if(len==0)System.out.println("РҐР°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё РѕС‚СЃСѓС‚СЃС‚РІСѓСЋС‚!");
 		for(int i=0;i<len;i++){
 			CharacterList.get(i).print();
 			
@@ -125,7 +125,7 @@ public class characteristic {
 	private static void printRules() {
 		// TODO Auto-generated method stub
 		int len = RulesList.size();
-		if(len==0)System.out.println("Правила отсутствуют!");
+		if(len==0)System.out.println("РџСЂР°РІРёР»Р° РѕС‚СЃСѓС‚СЃС‚РІСѓСЋС‚!");
 		for(int i=0;i<len;i++){
 			RulesList.get(i).print();
 			
@@ -136,28 +136,28 @@ public class characteristic {
 
 	static void multirultest(){
 		
-		Fact haircolor = new Fact("цвет_волос");
-		haircolor.addValue("русые");
-		haircolor.addValue("каштановые");
-		haircolor.addValue("золотистые");
+		Fact haircolor = new Fact("С†РІРµС‚_РІРѕР»РѕСЃ");
+		haircolor.addValue("СЂСѓСЃС‹Рµ");
+		haircolor.addValue("РєР°С€С‚Р°РЅРѕРІС‹Рµ");
+		haircolor.addValue("Р·РѕР»РѕС‚РёСЃС‚С‹Рµ");
 		
-		Fact eyecolor = new Fact("цвет_глаз");
-		eyecolor.addValue("голубые");
-		eyecolor.addValue("карие");
-		eyecolor.addValue("зеленые");
-		eyecolor.addValue("черные");
+		Fact eyecolor = new Fact("С†РІРµС‚_РіР»Р°Р·");
+		eyecolor.addValue("РіРѕР»СѓР±С‹Рµ");
+		eyecolor.addValue("РєР°СЂРёРµ");
+		eyecolor.addValue("Р·РµР»РµРЅС‹Рµ");
+		eyecolor.addValue("С‡РµСЂРЅС‹Рµ");
 		
-		Fact dresscolor = new Fact("цвет_платья");
-		eyecolor.addValue("белое");
-		eyecolor.addValue("красное");
-		eyecolor.addValue("черное");
-		eyecolor.addValue("пёстрое");
+		Fact dresscolor = new Fact("С†РІРµС‚_РїР»Р°С‚СЊСЏ");
+		eyecolor.addValue("Р±РµР»РѕРµ");
+		eyecolor.addValue("РєСЂР°СЃРЅРѕРµ");
+		eyecolor.addValue("С‡РµСЂРЅРѕРµ");
+		eyecolor.addValue("РїС‘СЃС‚СЂРѕРµ");
 		
 		
 		MultiRule myrule=new MultiRule();
-		myrule.joincondition(haircolor, "русые");
-		myrule.joincondition(eyecolor, "карие");
-		myrule.joinconsequence(dresscolor, "черное");
+		myrule.joincondition(haircolor, "СЂСѓСЃС‹Рµ");
+		myrule.joincondition(eyecolor, "РєР°СЂРёРµ");
+		myrule.joinconsequence(dresscolor, "С‡РµСЂРЅРѕРµ");
 		myrule.print();
 		
 		
@@ -169,47 +169,47 @@ public class characteristic {
 		Navigator nav=new Navigator() {
 			@Override 
 			void onCreate() {
-				Item item1=new Item("Характеристики");
+				Item item1=new Item("РҐР°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё");
 				
-				Item item11=new Item("Ввод нового значения старой характеристики") {
+				Item item11=new Item("Р’РІРѕРґ РЅРѕРІРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ СЃС‚Р°СЂРѕР№ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё") {
 					@Override
 					void action() {
 						if(!readValues()){
-							System.out.println("Данной характеристики не существует!");
+							System.out.println("Р”Р°РЅРЅРѕР№ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚!");
 						}
 					}
 					
 				};
-				Item item12=new Item("Ввод новой характеристики") {
+				Item item12=new Item("Р’РІРѕРґ РЅРѕРІРѕР№ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєРё") {
 					@Override
 					void action() {
 						if(!readNewFact()){
-							System.out.println("Такая характеристика уже существует!");
+							System.out.println("РўР°РєР°СЏ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРєР° СѓР¶Рµ СЃСѓС‰РµСЃС‚РІСѓРµС‚!");
 						}
 					}
 					
 				};
-				Item item13=new Item("Просмотр характеристик") {
+				Item item13=new Item("РџСЂРѕСЃРјРѕС‚СЂ С…Р°СЂР°РєС‚РµСЂРёСЃС‚РёРє") {
 					@Override
 					void action() {
 						printFacts();
 					}
 					
 				};
-				Item item2=new Item("Правила");
+				Item item2=new Item("РџСЂР°РІРёР»Р°");
 				
-				Item item21=new Item("Ввод нового правила") {
+				Item item21=new Item("Р’РІРѕРґ РЅРѕРІРѕРіРѕ РїСЂР°РІРёР»Р°") {
 					@Override
 					void action() {
 						if(!readNewMultiRule()){
-							System.out.println("Правило не добавлено!");
+							System.out.println("РџСЂР°РІРёР»Рѕ РЅРµ РґРѕР±Р°РІР»РµРЅРѕ!");
 						}
 					}
 				};
 				
-				Item item22=new Item("Правка правила");
+				Item item22=new Item("РџСЂР°РІРєР° РїСЂР°РІРёР»Р°");
 				
-				Item item23=new Item("Просмотр правил") {
+				Item item23=new Item("РџСЂРѕСЃРјРѕС‚СЂ РїСЂР°РІРёР»") {
 					@Override
 					void action() {
 						System.out.write(13);
