@@ -14,116 +14,6 @@ public class characteristic {
 	static final String THREE="5";
 	static final String FOUR="6";
 	
-	static class Fact{
-		private String name=new String();
-		private ArrayList<String> ValuesList;
-		Fact(String name){
-			this.name=name;
-			this.ValuesList = new ArrayList<String>();
-		}
-		boolean addValue(String value){
-			if(hasval(value)){
-				System.out.println("Такое значение уже есть!");
-				return false;
-			}
-			this.ValuesList.add(value);
-			return true;
-		}
-		String getName(){
-			return this.name;
-		}
-		ArrayList<String> getValues(){
-			return null;
-		}
-		boolean hasval(String val){
-			int len = ValuesList.size();
-			for(int i=0;i<len;i++){
-				if(ValuesList.get(i).equals(val)){
-					
-					return true;
-				}
-			}
-			return false;
-		}
-		public void print() {
-			// TODO Auto-generated method stub
-			System.out.println(this.name);
-			for(int i=0;i<ValuesList.size();i++){
-				System.out.println(" |---"+ValuesList.get(i));
-			}
-		}
-	}
-	
-	static class MultiRule{
-		//из набор характеристик
-		private ArrayList<Fact> facts=new ArrayList<Fact>();
-		//и набора их значений
-		private ArrayList<String> vals=new ArrayList<String>();
-		//следуют характеристики
-		private ArrayList<Fact> folwfacts=new ArrayList<Fact>();
-		//и набор их значений
-		private ArrayList<String> folwvals=new ArrayList<String>();
-		MultiRule(){
-			
-		}
-		void print(){
-			System.out.println("ЕСЛИ ");
-			int count=facts.size();
-			for(int i=0;i<count;i++){
-				System.out.print("    (");
-				System.out.print(facts.get(i).getName()+" == \""+vals.get(i)+"\"");
-				String ch=" И ";
-				if(i==count-1){
-					ch="";
-				}
-				System.out.println(")"+ch);
-				
-			}
-			System.out.println("ТО ");
-			
-			for(int i=0;i<folwfacts.size();i++){
-				System.out.println("    "+folwfacts.get(i).getName()+" = \""+folwvals.get(i)+"\";");
-			}
-		}
-		//присоединяем к условию
-		//0 - характеристика уже есть
-		//1 - характеристики нет, но значение не входит в список возможных
-		//3 - все удачно
-		int joincondition(Fact nfact, String val){
-			for(int i=0;i<facts.size();i++){
-				if(nfact!=facts.get(i)){
-					
-				}else{
-					return 0;
-				}
-			}
-			if(nfact.hasval(val)){
-				facts.add(nfact);
-				vals.add(val);
-				return 2;
-			}
-			return 1;
-		}
-		//присоединяем к следствию
-		int joinconsequence(Fact nfact, String val){
-			for(int i=0;i<folwfacts.size();i++){
-				if(nfact!=folwfacts.get(i)){
-					
-				}else{
-					return 0;
-				}
-			}
-			if(nfact.hasval(val)){
-				folwfacts.add(nfact);
-				folwvals.add(val);
-				return 2;
-			}
-			return 1;
-		}
-		
-		
-	}
-	
 	static ArrayList<Fact> CharacterList = new ArrayList<Fact>();
 	static ArrayList<MultiRule> RulesList = new ArrayList<MultiRule>();
 	
@@ -149,6 +39,46 @@ public class characteristic {
 			return stroke;
 		}
 		return "";
+		
+	}
+	
+	static boolean implicate(String stroke){
+		if(stroke.equals(ONE)){
+			
+			if(!readValues()){
+				System.out.println("Данной характеристики не существует!");
+			}
+			return true;
+		}else
+		if(stroke.equals(TWO)){
+			if(!readNewFact()){
+				System.out.println("Характеристика с таким именем уже существует!");
+			}
+			return true;
+		}else
+		if(stroke.equals(PRINTFACTS)){
+			printFacts();
+			return true;
+			
+		}else
+		if(stroke.equals(EXIT)){
+			return false;
+		}else
+		if(stroke.equals(THREE)){
+			if(!readNewMultiRule()){
+				System.out.println("Правило не добавлено!");
+			}
+			return true;
+		}else
+		if(stroke.equals(FOUR)){
+			printRules();
+			return true;
+		}
+		else{
+			System.out.println("Введите цифру от 1 до 4!");
+			return true;
+		}
+		
 		
 	}
 	static boolean readNewFact(){
@@ -178,7 +108,6 @@ public class characteristic {
 		}
 		return null;
 	}
-	
 	static boolean readValues(){
 		Scanner in = new Scanner(System.in);
 		System.out.println("Введите имя существующей характеристики!");
@@ -197,7 +126,6 @@ public class characteristic {
 		
 		return false;
 	}
-	
 	static boolean readNewMultiRule(){
 		MultiRule locRule=new MultiRule();
 		Scanner in = new Scanner(System.in);
@@ -270,45 +198,7 @@ public class characteristic {
 		}
 		
 	}
-	static boolean implicate(String stroke){
-		if(stroke.equals(ONE)){
-			
-			if(!readValues()){
-				System.out.println("Данной характеристики не существует!");
-			}
-			return true;
-		}else
-		if(stroke.equals(TWO)){
-			if(!readNewFact()){
-				System.out.println("Характеристика с таким именем уже существует!");
-			}
-			return true;
-		}else
-		if(stroke.equals(PRINTFACTS)){
-			printFacts();
-			return true;
-			
-		}else
-		if(stroke.equals(EXIT)){
-			return false;
-		}else
-		if(stroke.equals(THREE)){
-			if(!readNewMultiRule()){
-				System.out.println("Правило не добавлено!");
-			}
-			return true;
-		}else
-		if(stroke.equals(FOUR)){
-			printRules();
-			return false;
-		}
-		else{
-			System.out.println("Введите цифру от 1 до 4!");
-			return true;
-		}
-		
-		
-	}
+	
 	static void readCharacteristics(){
 		System.out.println("Вы находитесь в разделе работы с характеристиками.");
 		while(implicate(getLine(1))){
