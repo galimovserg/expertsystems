@@ -109,19 +109,17 @@ public class characteristic {
 		return null;
 	}
 	static boolean readValues(){
+		
 		Scanner in = new Scanner(System.in);
 		System.out.println("¬ведите им€ существующей характеристики!");
 		String stroke=in.nextLine();
 		int len=CharacterList.size();
-		for(int i=0;i<len;i++){
-			
-			if(CharacterList.get(i).getName().equals(stroke)){
-				System.out.println("¬ведите новое значение!");
-				String value=in.nextLine();
-				CharacterList.get(i).addValue(value);
-				return true;
-			}
-			
+		Fact locfact=searchByName(stroke);
+		if(locfact!=null) {
+			System.out.println("¬ведите новое значение!");
+			String value=in.nextLine();
+			locfact.addValue(value);
+			return true;
 		}
 		
 		return false;
