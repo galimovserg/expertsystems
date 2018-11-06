@@ -14,7 +14,6 @@ public class characteristic {
 		Scanner in = new Scanner(System.in);
 		System.out.println("Введите имя новой характеристики:");
 		String stroke=in.nextLine();
-		in.close();
 		Fact newfact = new Fact(stroke);
 		int len=CharacterList.size();
 		for(int i=0;i<len;i++){
@@ -26,6 +25,7 @@ public class characteristic {
 		
 		return true;
 	}
+	
 	static Fact searchByName(String name){
 		int len=CharacterList.size();
 		for(int i=0;i<len;i++){
@@ -51,13 +51,11 @@ public class characteristic {
 			
 			return true;
 		}
-		in.close();
 		return false;
 	}
 	static boolean readNewMultiRule(){
 		MultiRule locRule=new MultiRule();
-		Scanner in = new Scanner(System.in);
-		
+		Scanner in = new Scanner(System.in);	
 		System.out.println("Ввод условия...");
 		System.out.println("Введите имя существующей характеристики!");
 		String name=in.nextLine();
@@ -132,8 +130,6 @@ public class characteristic {
 		}
 		
 	}
-	
-
 	static void multirultest(){
 		
 		Fact haircolor = new Fact("цвет_волос");
@@ -162,10 +158,8 @@ public class characteristic {
 		
 		
 	}
-
-	
-	
 	public static void main(String[] args) {
+		//создаю меню
 		Navigator nav=new Navigator() {
 			@Override 
 			void onCreate() {
@@ -227,6 +221,8 @@ public class characteristic {
 			}
 			
 		};
+		
+		//запускаю меню
 		nav.run();
 		
 		

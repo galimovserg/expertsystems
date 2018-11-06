@@ -12,20 +12,37 @@ public class Navigator {
 		Item(String caption){
 			this.caption=caption;
 		}
+		/**
+		 * Переопределяемый метод, выполняется при выборе этого пункта.
+		 */
 		void action() {	
 		}
+		/**
+		 * Добавляет дочерний пункт
+		 * @param item
+		 */
 		final void addItem(Item item){
 			if(subitems==null)subitems=new ArrayList<Item>();
 			item.setParent(this);
 			subitems.add(item);  
 			
 		}
+		//устанавливает родительский пункт
 		final void setParent(Item item) {
 			parent=item;
 		}
+		/**
+		 * возвращает описание меню
+		 * @return
+		 */
 		String getCaption() {
 			return caption;
 		}
+		/**
+		 * Возвращает пункт который выбрал пользователь
+		 * @param stroka
+		 * @return
+		 */
 		Item getByNum(String stroka) {
 			if(subitems==null) return this;
 			int pos=Integer.valueOf(stroka)-1;
@@ -37,6 +54,9 @@ public class Navigator {
 			}
 			
 		}
+		/**
+		 * выводит пункты на выбор
+		 */
 		void print(){
 			
 			System.out.println("Выбирите пункт:");
@@ -55,6 +75,10 @@ public class Navigator {
 	}
 	
 	Item head=null;
+	/**
+	 * Добавляет главный пункт
+	 * @param item
+	 */
 	void addItem(Item item) {
 		if(head==null)
 			head=new Item(" ");
@@ -62,6 +86,11 @@ public class Navigator {
 		head.addItem(item);
 		
 	}
+	/**
+	 * Выводит меню и ожидает выбора, возвращает следующий пункт к которому следует перейти
+	 * @param item
+	 * @return
+	 */
 	Item getItem(Item item) {
 		if(item.subitems==null) {
 			item.action();
@@ -87,6 +116,10 @@ public class Navigator {
 		}		
 		
 	}
+	/**
+	 * метод вызывается при инициализации объекта меню,
+	 * здесь следует задовать его структуру и методы для пунктов
+	 */
 	void onCreate() {
 		// TODO Auto-generated method stub
 		
