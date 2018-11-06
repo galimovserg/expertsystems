@@ -92,8 +92,8 @@ public class Navigator {
 	 * @return
 	 */
 	Item getItem(Item item) {
-		if(item.subitems==null) {
-			item.action();
+		item.action();
+		if(item.subitems==null) {	
 			return item.getParent();
 		}
 		item.print();

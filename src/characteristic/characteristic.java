@@ -163,7 +163,15 @@ public class characteristic {
 		Navigator nav=new Navigator() {
 			@Override 
 			void onCreate() {
-				Item item1=new Item("Характеристики");
+				Item item1=new Item("Характеристики") {
+					@Override
+					void action() {
+						
+						System.out.println("Вы попали в раздел характеристики!");
+						
+					}
+					
+				};
 				
 				Item item11=new Item("Ввод нового значения старой характеристики") {
 					@Override
@@ -174,6 +182,8 @@ public class characteristic {
 					}
 					
 				};
+				
+				
 				Item item12=new Item("Ввод новой характеристики") {
 					@Override
 					void action() {
@@ -183,6 +193,7 @@ public class characteristic {
 					}
 					
 				};
+				
 				Item item13=new Item("Просмотр характеристик") {
 					@Override
 					void action() {
