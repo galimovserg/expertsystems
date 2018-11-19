@@ -52,13 +52,13 @@ class MultiRule{
 	 * @return
 	 */
 	int joincondition(Fact nfact, String val){
-		for(int i=0;i<facts.size();i++){
+		/*for(int i=0;i<facts.size();i++){
 			if(nfact!=facts.get(i)){
 				
 			}else{
 				return 0;
 			}
-		}
+		}*/
 		if(nfact.hasval(val)){
 			facts.add(nfact);
 			vals.add(val);
@@ -78,12 +78,12 @@ class MultiRule{
 	 * @return
 	 */
 	int joinconsequence(Fact nfact, String val){
-		for(int i=0;i<folwfacts.size();i++){
+		/*for(int i=0;i<folwfacts.size();i++){
 			if(nfact!=folwfacts.get(i)){	
 			}else{
 				return 0;
 			}
-		}
+		}*/
 		if(nfact.hasval(val)){
 			folwfacts.add(nfact);
 			folwvals.add(val);
@@ -91,6 +91,28 @@ class MultiRule{
 		}
 		return 1;
 	}
-	
+	Boolean flagobr=false;
+	boolean prog() {
+		if(flagobr) {
+			return false;
+		}
+		Boolean fl=true;
+		for(int i=0;i<facts.size();i++) {
+			if(facts.get(i).isvaluetrue(vals.get(i))) {
+				
+			}else {
+				fl=false;
+			}
+		}
+		if(fl==true) {
+			for(int i=0;i<folwfacts.size();i++) {
+				folwfacts.get(i).setExp(folwvals.get(i));
+			}
+			flagobr=true;
+		}else {
+			return false;
+		}
+		return true;
+	}
 	
 }
