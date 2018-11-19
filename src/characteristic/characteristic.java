@@ -273,6 +273,13 @@ public class characteristic {
 		myrule1.joinconsequence(r1, "внутричерепная_гипертензия");
 		RulesList.add(myrule1);
 		
+		MultiRule myrule3=new MultiRule();
+		Fact f31=searchByName("Подозрение");
+		myrule3.joincondition(f31, "туберкулез");
+		Fact r31=searchByName("Обследование");
+		myrule3.joinconsequence(r31, "анализ_макроты");
+		RulesList.add(myrule3);
+		
 		MultiRule myrule2=new MultiRule();
 		Fact f21=searchByName("Наличие_боли");
 		myrule2.joincondition(f21, "да");
@@ -290,12 +297,7 @@ public class characteristic {
 		myrule2.joinconsequence(r21, "туберкулез");
 		RulesList.add(myrule2);
 		
-		MultiRule myrule3=new MultiRule();
-		Fact f31=searchByName("Подозрение");
-		myrule3.joincondition(f31, "туберкулез");
-		Fact r31=searchByName("Обследование");
-		myrule3.joinconsequence(r31, "анализ_макроты");
-		RulesList.add(myrule3);
+	
 		
 		
 		MultiRule myrule4=new MultiRule();
@@ -328,12 +330,18 @@ public class characteristic {
 		}
 		
 	}
+	static String res="";
 	static void expertize() {
 		Boolean lastprogon=false;
+		res="";
+		int numpr=0;
 		while(lastprogon==false) {
 			lastprogon=true;
+			numpr++;
+			res+="Номер прохода:"+numpr+'\n';
 			for(int i=0;i<RulesList.size();i++) {
 				if(RulesList.get(i).prog()) {
+					res+=RulesList.get(i).toString();
 					lastprogon=false;
 				}
 			}
@@ -443,6 +451,12 @@ public class characteristic {
 						}
 					}
 				};
+				Item item34=new Item("Вывести рассуждения") {
+					@Override
+					void action() {
+						System.out.println(res);
+					}
+				};
 				item1.addItem(item11);
 				item1.addItem(item12);
 				item1.addItem(item13);
@@ -454,6 +468,7 @@ public class characteristic {
 				item3.addItem(item31);
 				item3.addItem(item32);
 				item3.addItem(item33);
+				item3.addItem(item34);
 				addItem(item1);
 				addItem(item2);
 				addItem(item3);

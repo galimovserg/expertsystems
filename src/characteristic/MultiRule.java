@@ -23,7 +23,7 @@ class MultiRule{
 	 * Выводит правило в понятном виде в консоль.
 	 */
 	void print(){
-		System.out.println("ЕСЛИ ");
+		/*System.out.println("ЕСЛИ ");
 		int count=facts.size();
 		for(int i=0;i<count;i++){
 			System.out.print("    (");
@@ -38,7 +38,27 @@ class MultiRule{
 		
 		for(int i=0;i<folwfacts.size();i++){
 			System.out.println("    "+folwfacts.get(i).getName()+" = \""+folwvals.get(i)+"\";");
+		}*/
+		System.out.println(toString());
+	}
+	public String toString() {
+		String str="ЕСЛИ "+'\n';
+		int count=facts.size();
+		for(int i=0;i<count;i++){
+			str+="    (";
+			str+=facts.get(i).getName()+" == \""+vals.get(i)+"\"";
+			String ch=" И ";
+			if(i==count-1){
+				ch="";
+			}
+			str+=")"+ch+'\n';
 		}
+		str+="ТО "+'\n';
+		
+		for(int i=0;i<folwfacts.size();i++){
+			str+="    "+folwfacts.get(i).getName()+" = \""+folwvals.get(i)+"\";"+'\n';
+		}
+		return str;
 	}
 
 	/**
