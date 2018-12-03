@@ -45,7 +45,13 @@ public class Navigator {
 		 */
 		Item getByNum(String stroka) {
 			if(subitems==null) return this;
-			int pos=Integer.valueOf(stroka)-1;
+			int pos=0;
+			try {
+				pos=Integer.valueOf(stroka)-1;
+			}catch(Exception e) {
+				pos=-1;
+			}
+			
 			if(pos>=0&&pos<=subitems.size()) {
 				Item item=subitems.get(pos);
 				return item;

@@ -45,16 +45,28 @@ public class characteristic {
 	}
 	static boolean readValues(){
 		
-		Scanner in = new Scanner(System.in);
-		System.out.println("Введите имя существующей характеристики!");
-		String stroke=in.nextLine();
-		Fact locfact=searchByName(stroke);
+		Scanner in= new Scanner(System.in);
+		System.out.println("Введите номер характеристики:");
+		
+		printchars();
+		int namec=-1;
+		try {
+			namec=in.nextInt();
+		}catch(Exception e) {
+			namec=-1;
+		}
+		
+		if(namec>=0&&namec<CharacterList.size()) {
+		Fact locfact=CharacterList.get(namec);
 		if(locfact!=null) {
 			System.out.println("Введите новое значение!");
 			String value=in.nextLine();
+			value=in.nextLine();
 			locfact.addValue(value);
 			
 			return true;
+		}
+		
 		}
 		return false;
 	}
@@ -62,23 +74,38 @@ public class characteristic {
 		MultiRule locRule=new MultiRule();
 		Scanner in = new Scanner(System.in);	
 		System.out.println("Ввод условия...");
-		System.out.println("Введите имя существующей характеристики!");
-		String name=in.nextLine();
-		Fact locfact=searchByName(name);
-		if(locfact==null){
+		System.out.println("Введите номер характеристики!");
+		printchars();
+		int namec=-1;
+		try {
+			namec=in.nextInt();
+		}catch(Exception e) {
+			namec=-1;
+		}
+		Fact locfact;
+		if(namec>=0&&namec<CharacterList.size()) {
+			locfact=CharacterList.get(namec);
+		}else {
+			System.out.println("Нет такой характеристики");
+			return false;
 			
-			System.out.println("характеристики не задана");
+		}
+		if(locfact==null){
+			System.out.println("Нет такой характеристики");
 			return false;
 		}
+		
 		System.out.println("Введите значение!");
+		
 		String value=in.nextLine();
+		value=in.nextLine();
 		int rt=locRule.joincondition(locfact, value);
 		//0 - характеристика уже есть
 		//1 - характеристика не найдена, но значение не входит в список возможных
 		//2 - все удачно
 		if(rt==0){
 			
-			System.out.println("характеристика уже усть");
+			System.out.println("характеристика уже есть");
 			return false;
 		}else
 		if(rt==1){
@@ -89,16 +116,32 @@ public class characteristic {
 		
 		
 		System.out.println("Ввод следствия...");
-		System.out.println("Введите имя существующей характеристики!");
-		String namec=in.nextLine();
-		Fact locfactc=searchByName(namec);
-		if(locfactc==null){
-			System.out.println("характеристики не задана");
+		System.out.println("Введите номер характеристики!");
+		printchars();
+		int namec2=-1;
+		try {
+			namec2=in.nextInt();
+		}catch(Exception e) {
+			namec2=-1;
+		}
+		Fact locfactc;
+		if(namec2>=0&&namec2<CharacterList.size()) {
+			locfactc=CharacterList.get(namec2);
+		}else {
+			System.out.println("Нет такой характеристики");
+			return false;
 			
+		}
+		if(locfactc==null){
+			System.out.println("Нет такой характеристики");
 			return false;
 		}
+		
+		
+		
 		System.out.println("Введите значение!");
 		String valuec=in.nextLine();
+		valuec=in.nextLine();
 		rt=locRule.joinconsequence(locfactc, valuec);
 		if(rt==0){
 			System.out.println("характеристика уже есть");
@@ -475,9 +518,16 @@ public class characteristic {
 			}
 			
 		};
+		String str = "";
 		
 		//запускаю меню
-		nav.run();
+		while(!str.equals("exit")) {
+			nav.run();
+			Scanner sc=new Scanner(System.in);
+			System.out.println("Введите 'exit' для выхода.");
+			str=sc.nextLine();
+		}
+		
 		
 		
 	}
